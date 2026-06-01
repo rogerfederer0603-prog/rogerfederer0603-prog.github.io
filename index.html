@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Daiki Endo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --bg2: #13161e;
+      --border: rgba(255,255,255,0.07);
+      --accent: #4f8ef7;
+      --accent2: #a78bfa;
+      --text: #e4e8f0;
+      --muted: #6b7280;
+      --card: #161b26;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%);
+      bottom: 0; left: 100px;
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 800px; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 20px;
+    }
+    .hero-tag i { font-size: 11px; }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 .name { color: var(--accent); }
+    .hero h1 .role {
+      display: block;
+      font-size: clamp(20px, 3.5vw, 36px);
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      margin-top: 8px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+
+    /* ===== SKILLS ===== */
+    .skills-bar {
+      padding: 28px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .skill-item i { color: var(--accent); font-size: 15px; }
+
+    /* ===== SECTION ===== */
+    section { padding: 96px 48px; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+    .section-title span { color: var(--accent); }
+
+    /* ===== WORK GRID ===== */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+    }
+    .work-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .work-card:hover {
+      border-color: rgba(79,142,247,0.35);
+      transform: translateY(-4px);
+    }
+    .work-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-thumb i {
+      font-size: 52px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+    .thumb-lp { background: linear-gradient(135deg, #1a2744 0%, #1e3a6e 100%); color: #4f8ef7; }
+    .thumb-pet { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: #60b8d4; }
+    .thumb-bot { background: linear-gradient(135deg, #1a0533 0%, #2d1b69 100%); color: #a78bfa; }
+    .thumb-app { background: linear-gradient(135deg, #0a1628 0%, #0d3b2e 100%); color: #34d399; }
+    .work-body { padding: 24px; }
+    .work-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .work-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+    .tag-lp { background: rgba(79,142,247,0.12); color: #4f8ef7; }
+    .tag-en { background: rgba(52,211,153,0.12); color: #34d399; }
+    .tag-jp { background: rgba(251,191,36,0.12); color: #fbbf24; }
+    .tag-bot { background: rgba(167,139,250,0.12); color: #a78bfa; }
+    .tag-web { background: rgba(249,115,22,0.12); color: #f97316; }
+    .work-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .work-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .work-link:hover { gap: 10px; }
+
+    /* ===== ABOUT ===== */
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      max-width: 960px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .cert-list { display: flex; flex-direction: column; gap: 12px; }
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .cert-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(79,142,247,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .cert-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .cert-score { font-size: 12px; color: var(--muted); }
+
+    /* ===== CONTACT ===== */
+    .contact-inner { max-width: 560px; }
+    .contact-inner p { font-size: 15px; color: var(--muted); margin-bottom: 32px; line-height: 1.8; }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-link:hover { border-color: rgba(79,142,247,0.3); transform: translateX(4px); }
+    .contact-link i { color: var(--accent); font-size: 16px; width: 20px; text-align: center; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero, section { padding-left: 24px; padding-right: 24px; }
+      .skills-bar { padding: 24px; gap: 20px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Daiki<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag"><i class="fa-solid fa-circle-dot"></i> Available for freelance work</div>
+      <h1>
+        Hi, I'm <span class="name">Daiki</span>
+        <span class="role">LP Design &amp; Web Development</span>
+      </h1>
+      <p class="hero-desc">
+        英検1級・TOEIC 945点。日英バイリンガルのLP制作・Webサイト制作を得意とするフリーランスです。
+        デザインから実装・英語コピーライティングまで一貫して対応します。
+      </p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-primary"><i class="fa-solid fa-arrow-down"></i> 制作実績を見る</a>
+        <a href="#contact" class="btn-outline"><i class="fa-solid fa-paper-plane"></i> お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS BAR -->
+  <div class="skills-bar">
+    <div class="skill-item"><i class="fa-solid fa-code"></i> HTML / CSS / JavaScript</div>
+    <div class="skill-item"><i class="fa-solid fa-language"></i> 日英バイリンガル</div>
+    <div class="skill-item"><i class="fa-solid fa-mobile-screen"></i> レスポンシブ対応</div>
+    <div class="skill-item"><i class="fa-solid fa-chart-line"></i> SEO / GEO最適化</div>
+    <div class="skill-item"><i class="fa-brands fa-github"></i> GitHub Pages運用</div>
+  </div>
+
+  <!-- WORK -->
+  <section id="work">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">制作<span>実績</span></h2>
+    <div class="work-grid">
+
+      <a href="https://eikencoaching.jp" target="_blank" rel="noopener" class="work-card">
+        <div class="work-thumb thumb-lp">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="work-body">
+          <div class="work-tags">
+            <span class="work-tag tag-lp">LP制作</span>
+            <span class="work-tag tag-en">英語</span>
+            <span class="work-tag tag-jp">日本語</span>
+          </div>
+          <h3 class="work-title">英検コーチング LP</h3>
+          <p class="work-desc">英検1級・TOEIC 945点の講師によるコーチングサービスのLP。SEO・GEO最適化・Stripe決済連携・GitHub Pages運用まで一貫制作。</p>
+          <span class="work-link">サイトを見る <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="https://rogerfederer0603-prog.github.io/pet-transport-lp-sample/" target="_blank" rel="noopener" class="work-card">
+        <div class="work-thumb thumb-pet">
+          <i class="fa-solid fa-plane"></i>
+        </div>
+        <div class="work-body">
+          <div class="work-tags">
+            <span class="work-tag tag-lp">LP制作</span>
+            <span class="work-tag tag-en">日英切替</span>
+          </div>
+          <h3 class="work-title">ペット国際輸送 バイリンガルLP（サンプル）</h3>
+          <p class="work-desc">日本語・英語をワンクリックで切り替えられるバイリンガルLP。ペット輸送サービスを想定したサンプル制作。</p>
+          <span class="work-link">サイトを見る <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/rogerfederer0603-prog/discord-jobcan-bot" target="_blank" rel="noopener" class="work-card">
+        <div class="work-thumb thumb-bot">
+          <i class="fa-brands fa-discord"></i>
+        </div>
+        <div class="work-body">
+          <div class="work-tags">
+            <span class="work-tag tag-bot">Bot開発</span>
+            <span class="work-tag tag-web">Python</span>
+          </div>
+          <h3 class="work-title">Discord × Jobcan 連携Bot</h3>
+          <p class="work-desc">DiscordとJobcan（勤怠管理）を連携させた自動化Bot。コマンドで打刻・確認が完結します。</p>
+          <span class="work-link">GitHubで見る <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/rogerfederer0603-prog/trip-mini-streamlit" target="_blank" rel="noopener" class="work-card">
+        <div class="work-thumb thumb-app">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+        <div class="work-body">
+          <div class="work-tags">
+            <span class="work-tag tag-web">Streamlit</span>
+            <span class="work-tag tag-web">Python</span>
+          </div>
+          <h3 class="work-title">旅行プラン生成アプリ（Streamlit）</h3>
+          <p class="work-desc">目的地と日程を入力するだけで旅行プランを自動生成するWebアプリ。Python + Streamlitで実装。</p>
+          <span class="work-link">GitHubで見る <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <p class="section-label">About</p>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="about-inner">
+      <div class="about-text">
+        <p>フリーランスとして <strong>LP制作・Webサイト制作・英語コピーライティング</strong> を中心に活動しています。</p>
+        <p>学習塾のスーパーバイザーとして <strong>全国50校舎以上</strong> を担当してきた経験をもとに、「伝わるコンテンツ」の設計を得意としています。</p>
+        <p>英検1級・TOEIC 945点・IELTS 7.0を保有しており、<strong>日英バイリンガルのLP・コピーライティング</strong> に対応しています。英語の原稿作成から翻訳・ローカライズまで一貫して請け負えます。</p>
+        <p>HTML/CSS/JavaScriptによる静的サイト制作、GitHub Pagesでの運用、Stripe決済連携、SEO/GEO最適化まで対応しています。</p>
+      </div>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-icon"><i class="fa-solid fa-certificate"></i></div>
+          <div>
+            <p class="cert-name">英検1級</p>
+            <p class="cert-score">リスニング満点取得</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon"><i class="fa-solid fa-headphones"></i></div>
+          <div>
+            <p class="cert-name">TOEIC L/R 945点</p>
+            <p class="cert-score">Listening & Reading</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon"><i class="fa-solid fa-earth-asia"></i></div>
+          <div>
+            <p class="cert-name">IELTS 7.0</p>
+            <p class="cert-score">Academic Module</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon"><i class="fa-solid fa-school"></i></div>
+          <div>
+            <p class="cert-name">塾SVとして50校舎以上担当</p>
+            <p class="cert-score">教育事業・コンテンツ設計</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">お<span>問い合わせ</span></h2>
+    <div class="contact-inner">
+      <p>LP制作・Webサイト制作・英語コピーライティングのご依頼はお気軽にお問い合わせください。</p>
+      <div class="contact-links">
+        <a href="mailto:rogerfederer0603@gmail.com" class="contact-link">
+          <i class="fa-solid fa-envelope"></i>
+          rogerfederer0603@gmail.com
+        </a>
+        <a href="https://crowdworks.jp" target="_blank" rel="noopener" class="contact-link">
+          <i class="fa-solid fa-briefcase"></i>
+          クラウドワークスからご依頼
+        </a>
+        <a href="https://github.com/rogerfederer0603-prog" target="_blank" rel="noopener" class="contact-link">
+          <i class="fa-brands fa-github"></i>
+          GitHub: rogerfederer0603-prog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Daiki Endo. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://github.com/rogerfederer0603-prog" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:rogerfederer0603@gmail.com">Email</a>
+    </div>
+  </footer>
+
+</body>
+</html>
