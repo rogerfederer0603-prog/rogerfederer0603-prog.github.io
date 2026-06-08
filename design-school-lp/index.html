@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier Design School | 女性のためのWebデザインスクール</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:    #F46057;
+      --coral-d:  #d93f1f;
+      --coral-bg: #fef0f2;
+      --blue:     #4299c8;
+      --blue-bg:  #f2f7ff;
+      --slate:    #4C6072;
+      --dark:     #34414E;
+      --teal:     #6B9BAA;
+      --border:   #e3e9ed;
+      --bg:       #FBFBFC;
+      --white:    #ffffff;
+      --muted:    #8a9aaa;
+      --text:     #333333;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+
+    .logo {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .logo span { color: var(--coral); }
+
+    nav { display: flex; align-items: center; gap: 28px; }
+    nav a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    nav a:hover { color: var(--coral); }
+
+    .nav-btn {
+      background: var(--coral);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 13px !important;
+      transition: background .2s !important;
+    }
+    .nav-btn:hover { background: var(--coral-d) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding-top: 64px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-left {
+      background: var(--coral-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--coral);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      font-family: 'Roboto', sans-serif;
+      text-transform: uppercase;
+      width: fit-content;
+      border: 1px solid rgba(244,96,87,.2);
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 2.8vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+    .hero-title .coral { color: var(--coral); }
+
+    .hero-body {
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 2.1;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--coral);
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      width: fit-content;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(244,96,87,.3);
+      margin-bottom: 14px;
+    }
+    .hero-btn:hover { background: var(--coral-d); transform: translateY(-1px); }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* 右：写真 */
+    .hero-right {
+      background: #c8d8e8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      background: linear-gradient(160deg, #c0d4e4 0%, #a8c0d4 50%, #90acbf 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ph { text-align: center; color: rgba(52,65,78,.35); }
+    .ph i { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+    .ph span { font-size: 11px; letter-spacing: .12em; }
+
+    .float-badge {
+      position: absolute;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 14px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    }
+    .float-badge.b1 { bottom: 56px; left: -20px; }
+    .float-badge.b2 { top: 64px; right: -20px; }
+    .fb-num {
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--coral);
+      line-height: 1;
+    }
+    .fb-lbl { font-size: 11px; color: var(--muted); margin-top: 3px; white-space: nowrap; }
+
+    /* ─── STATS BAR ─── */
+    .stats {
+      background: var(--dark);
+      padding: 44px 0;
+    }
+    .stats-row {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .s-item {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+    .s-item:last-child { border-right: none; }
+    .s-num {
+      font-family: 'Roboto', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--coral);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .s-lbl { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+    /* ─── SECTION HEADER ─── */
+    .eyebrow {
+      font-family: 'Roboto', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--coral);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .sec-title {
+      font-size: clamp(1.5rem, 2vw, 1.9rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.5;
+      margin-bottom: 48px;
+    }
+
+    /* ─── REASON ─── */
+    .reason {
+      background: var(--blue-bg);
+      padding: 96px 48px;
+    }
+    .reason-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .r-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 36px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .r-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+
+    .r-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    .r-icon.c1 { background: var(--coral-bg); color: var(--coral); }
+    .r-icon.c2 { background: var(--blue-bg); color: var(--blue); }
+    .r-icon.c3 { background: #f0faf6; color: #1fc49d; }
+
+    .r-num {
+      font-family: 'Roboto', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .r-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 10px; line-height: 1.5; }
+    .r-text { font-size: 13px; color: var(--muted); line-height: 2; }
+
+    /* ─── CONCEPT ─── */
+    .concept {
+      background: var(--white);
+      padding: 96px 48px;
+    }
+    .concept-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .concept-photo {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #d8e8f0 0%, #c0d4e4 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .concept-body p {
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 2.2;
+      margin-bottom: 18px;
+    }
+    .concept-body p:last-child { margin-bottom: 0; }
+
+    /* ─── CURRICULUM ─── */
+    .curriculum {
+      background: var(--coral-bg);
+      padding: 96px 48px;
+    }
+    .curriculum-inner { max-width: 1100px; margin: 0 auto; }
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .step-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .step-phase {
+      font-family: 'Roboto', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .step-bar {
+      width: 32px; height: 3px;
+      background: var(--coral);
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
+    .step-title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .step-text { font-size: 12px; color: var(--muted); line-height: 1.9; }
+
+    /* ─── VOICE ─── */
+    .voice {
+      background: var(--blue-bg);
+      padding: 96px 48px;
+    }
+    .voice-inner { max-width: 1100px; margin: 0 auto; }
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .v-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .v-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .v-ava {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, #f5d5d8, #e8c0c4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--coral); font-size: 16px; flex-shrink: 0;
+    }
+    .v-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+    .v-attr { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .v-stars { color: var(--coral); font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; }
+    .v-text { font-size: 13px; color: var(--slate); line-height: 2; }
+
+    /* ─── CTA ─── */
+    .cta-wrap {
+      background: var(--white);
+      padding: 96px 48px;
+    }
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--coral-bg);
+      border-radius: 20px;
+      padding: 72px 56px;
+    }
+    .cta-title {
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .cta-body {
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 2;
+      margin-bottom: 36px;
+    }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-coral {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--coral);
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(244,96,87,.3);
+    }
+    .btn-coral:hover { background: var(--coral-d); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1.5px solid var(--coral);
+      color: var(--coral);
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all .2s;
+      background: transparent;
+    }
+    .btn-ghost:hover { background: rgba(244,96,87,.06); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      padding: 36px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .f-logo {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+    }
+    .f-logo span { color: var(--coral); }
+    .f-copy { font-size: 11px; color: rgba(255,255,255,.3); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      header { padding: 0 20px; }
+      nav { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 52px 24px; }
+      .hero-right { min-height: 260px; }
+      .hero-btn { width: 100%; justify-content: center; }
+
+      .stats { padding: 32px 20px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .s-item:nth-child(2) { border-right: none; }
+      .s-item:nth-child(3),
+      .s-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; margin-top: 20px; }
+      .s-item:nth-child(4) { border-right: none; }
+
+      .reason, .concept, .curriculum, .voice, .cta-wrap { padding: 60px 24px; }
+      .reason-grid, .voice-grid { grid-template-columns: 1fr; }
+      .concept-inner { grid-template-columns: 1fr; gap: 36px; }
+      .step-grid { grid-template-columns: 1fr 1fr; }
+
+      .cta-inner { padding: 48px 24px; }
+      .cta-btns { flex-direction: column; align-items: center; }
+
+      footer { padding: 28px 24px; flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Atelier<span>.</span></div>
+  <nav>
+    <a href="#reason">特徴</a>
+    <a href="#curriculum">カリキュラム</a>
+    <a href="#voice">受講生の声</a>
+    <a href="#cta" class="nav-btn">無料体験に申込む</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Women's Web Design School</div>
+    <h1 class="hero-title">
+      未経験から、<br>
+      <span class="coral">在宅デザイナー</span>へ。<br>
+      40代でも、遅くない。
+    </h1>
+    <p class="hero-body">
+      忙しい毎日の中でも学べる完全オンラインのWebデザインスクール。
+      子育て中でも、仕事を持っていても、自分のペースで6ヶ月後の自分を変えられます。
+    </p>
+    <a href="#cta" class="hero-btn">
+      無料体験レッスンに申込む
+      <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+    </a>
+    <span class="hero-note">
+      <i class="fa-regular fa-calendar" style="color:var(--coral);font-size:12px;"></i>
+      次回開催：1月15日（月）20:00〜 オンライン・参加無料
+    </span>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo">
+      <div class="ph">
+        <i class="fa-regular fa-image"></i>
+        <span>受講生イメージ写真</span>
+      </div>
+    </div>
+    <div class="float-badge b1">
+      <div class="fb-num">2,400+</div>
+      <div class="fb-lbl">累計受講者数</div>
+    </div>
+    <div class="float-badge b2">
+      <div class="fb-num">93%</div>
+      <div class="fb-lbl">受講生満足度</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-row">
+    <div class="s-item">
+      <div class="s-num">6ヶ月</div>
+      <div class="s-lbl">未経験から<br>仕事獲得まで</div>
+    </div>
+    <div class="s-item">
+      <div class="s-num">20+</div>
+      <div class="s-lbl">学べる<br>スキル数</div>
+    </div>
+    <div class="s-item">
+      <div class="s-num">月5万円</div>
+      <div class="s-lbl">卒業生平均<br>副収入</div>
+    </div>
+    <div class="s-item">
+      <div class="s-num">93%</div>
+      <div class="s-lbl">受講生<br>満足度</div>
+    </div>
+  </div>
+</div>
+
+<!-- REASON -->
+<section class="reason" id="reason">
+  <div class="reason-inner">
+    <div class="eyebrow">Why Atelier</div>
+    <h2 class="sec-title">選ばれ続ける、3つの理由</h2>
+    <div class="reason-grid">
+      <div class="r-card">
+        <div class="r-icon c1"><i class="fa-solid fa-seedling"></i></div>
+        <div class="r-num">Reason 01</div>
+        <h3 class="r-title">未経験・40代でも<br>始められる設計</h3>
+        <p class="r-text">パソコン操作が苦手でも安心。基礎から丁寧に、自分のペースで進める設計になっています。年齢も経験も関係ありません。</p>
+      </div>
+      <div class="r-card">
+        <div class="r-icon c2"><i class="fa-solid fa-laptop"></i></div>
+        <div class="r-num">Reason 02</div>
+        <h3 class="r-title">スキマ時間で学べる<br>完全オンライン</h3>
+        <p class="r-text">授業は全て録画配信。子育て・仕事の合間でも学べます。1日30分の積み重ねで、6ヶ月後には仕事の取れるスキルが身につきます。</p>
+      </div>
+      <div class="r-card">
+        <div class="r-icon c3"><i class="fa-solid fa-hands-holding"></i></div>
+        <div class="r-num">Reason 03</div>
+        <h3 class="r-title">案件獲得まで<br>並走するサポート</h3>
+        <p class="r-text">ポートフォリオ作成から初案件まで、専任メンターが1対1でサポート。「卒業したら終わり」ではありません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <div class="concept-inner">
+    <div class="concept-photo">
+      <div class="ph">
+        <i class="fa-regular fa-image"></i>
+        <span>主催者・授業イメージ写真</span>
+      </div>
+    </div>
+    <div class="concept-body">
+      <div class="eyebrow">Concept</div>
+      <h2 class="sec-title" style="margin-bottom:28px;">
+        何歳からでも<br>人生は変えられる。
+      </h2>
+      <p>「今からWebデザイナーになるのは遅いですか？」という質問をよくいただきます。答えはいつも同じです。</p>
+      <p>年齢は関係ない。大切なのは、一歩踏み出す勇気だけです。</p>
+      <p>このスクールでは、40代・未経験からフリーランスになった卒業生が何人もいます。スキルより先に、あなたの「やってみたい」という気持ちを応援します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="curriculum-inner">
+    <div class="eyebrow">Curriculum</div>
+    <h2 class="sec-title">6ヶ月で、デザイナーへ</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-phase">Month 1 – 2</div>
+        <div class="step-bar"></div>
+        <h3 class="step-title">デザイン基礎</h3>
+        <p class="step-text">色・フォント・余白の原則。ルールを知れば、センスがなくても整って見えるデザインが作れます。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-phase">Month 2 – 3</div>
+        <div class="step-bar"></div>
+        <h3 class="step-title">ツール習得</h3>
+        <p class="step-text">Figma・Canvaを基礎から。バナー・LP・SNS画像を手を動かしながら習得します。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-phase">Month 4 – 5</div>
+        <div class="step-bar"></div>
+        <h3 class="step-title">LP・HP制作</h3>
+        <p class="step-text">実際のクライアント案件を想定した課題制作。採用されるポートフォリオをゼロから作ります。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-phase">Month 6</div>
+        <div class="step-bar"></div>
+        <h3 class="step-title">案件獲得サポート</h3>
+        <p class="step-text">クラウドワークスでの提案文・営業の書き方を学び、メンターと一緒に初案件を取りにいきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section class="voice" id="voice">
+  <div class="voice-inner">
+    <div class="eyebrow">User Voice</div>
+    <h2 class="sec-title">受講生の声</h2>
+    <div class="voice-grid">
+      <div class="v-card">
+        <div class="v-head">
+          <div class="v-ava"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <div class="v-name">T.K. さん</div>
+            <div class="v-attr">43歳・専業主婦</div>
+          </div>
+        </div>
+        <div class="v-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="v-text">子どもが寝た後に少しずつ学んで、半年で月3万円の副収入を得られるようになりました。「自分にもできるんだ」と初めて思えた体験でした。</p>
+      </div>
+      <div class="v-card">
+        <div class="v-head">
+          <div class="v-ava"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <div class="v-name">M.S. さん</div>
+            <div class="v-attr">38歳・会社員</div>
+          </div>
+        </div>
+        <div class="v-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="v-text">センスがないと諦めていましたが、ルールを知ると作品が見違えるように変わりました。職場の資料も「きれいになった」と褒められました。</p>
+      </div>
+      <div class="v-card">
+        <div class="v-head">
+          <div class="v-ava"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <div class="v-name">Y.N. さん</div>
+            <div class="v-attr">41歳・パート</div>
+          </div>
+        </div>
+        <div class="v-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="v-text">ポートフォリオ作成でつまずいていたところをメンターに丁寧に見てもらい、卒業後すぐに初案件を受注できました。本当に感謝しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap" id="cta">
+  <div class="cta-inner">
+    <div class="eyebrow">Free Lesson</div>
+    <h2 class="cta-title">
+      まず、話を聞いてみてください。<br>
+      無料体験レッスン、受付中。
+    </h2>
+    <p class="cta-body">
+      カリキュラム・料金・卒業後の働き方をオンラインでご説明します。<br>
+      参加無料・申込2分。毎週月・水・金 20:00〜開催。
+    </p>
+    <div class="cta-btns">
+      <a href="#" class="btn-coral">
+        無料体験レッスンに申込む
+        <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+      </a>
+      <a href="#" class="btn-ghost">
+        <i class="fa-regular fa-file-lines"></i>
+        資料を無料ダウンロード
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Atelier<span>.</span></div>
+  <p class="f-copy">&copy; 2024 Atelier Design School. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
