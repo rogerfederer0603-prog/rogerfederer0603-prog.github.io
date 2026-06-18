@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LP デザインサンプル 比較</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 24px 32px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    header p {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      height: calc(100vh - 100px);
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #ddd;
+    }
+    .panel:last-child { border-right: none; }
+
+    .panel-header {
+      padding: 14px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .panel-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .panel-sub {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .btn-open {
+      display: inline-block;
+      padding: 6px 14px;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-open:hover { opacity: 0.75; }
+
+    iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+    }
+
+    /* Mobile: stack vertically */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .panel {
+        border-right: none;
+        border-bottom: 2px solid #ddd;
+        height: 100vh;
+      }
+      .panel:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>LP デザインサンプル</h1>
+  <p>2つのLPを並べて比較できます。全画面で確認する場合は「別タブで開く」をクリック。</p>
+</header>
+
+<div class="grid">
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <div class="panel-label">サンプル A｜女性向けサービス店舗 LP</div>
+        <div class="panel-sub">エレガント系 / クリーム × ゴールド</div>
+      </div>
+      <a href="../fujin-lp/" target="_blank" class="btn-open">別タブで開く</a>
+    </div>
+    <iframe src="../fujin-lp/" title="女性向けサービス LP"></iframe>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <div class="panel-label">サンプル B｜FX スクール LP</div>
+        <div class="panel-sub">クリーン系 / 白 × 黒 × グリーン</div>
+      </div>
+      <a href="../fx-lp/" target="_blank" class="btn-open">別タブで開く</a>
+    </div>
+    <iframe src="../fx-lp/" title="FX スクール LP"></iframe>
+  </div>
+
+</div>
+
+</body>
+</html>
